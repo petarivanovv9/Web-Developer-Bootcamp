@@ -1,0 +1,19 @@
+img {
+  width: 30%;
+  float: left;
+  /*имаме 10%, които остават, 100% - 3*30%*/
+  /*за всяка снимка имаме margin отляво и отдясно, т.е общо 6*/
+  /*разделяме 10% на 6 и получаваме ~ 1.66% за всяка снимка*/
+  margin: 1.66%;
+}
+
+p {
+  font-family: 'Raleway';
+  margin-left: 1.66%;
+  font-size: 23px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-bottom: 2px solid #F1F1F1;
+  width: 30%;
+  padding-bottom: 20px;
+}
