@@ -4,12 +4,18 @@ var guess = Number(prompt("Guess a number:"));
 
 //console.log(typeof guess);
 
-if (guess === secretNumber) {
-  alert("You got it right!");
+//console.log(guess.indexOf("yes"));
+
+
+while (guess !== secretNumber) {
+  if (guess > secretNumber) {
+    alert("Too high. Guess again!");
+  }
+  else if (guess < secretNumber) {
+    alert("Too low. Guess again!");
+  }
+
+  guess = Number(prompt("Guess a number:"));
 }
-else if (guess > secretNumber) {
-  alert("Too high. Guess again!");
-}
-else {
-  alert("Too low. Guess again!");
-}
+
+alert("You got it right!");
