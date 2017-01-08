@@ -1,9 +1,10 @@
-body {
-  background: green;
-}
-
 #container {
-  background: gray;
   width: 360px;
   margin: 0 auto;
+  border: 2px solid gray;
+}
+
+.complited {
+  color: gray;
+  text-decoration: line-through;
 }

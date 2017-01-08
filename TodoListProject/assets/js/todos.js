@@ -1,1 +1,3 @@
-console.log("Hello");
+$("li").click(function(){
+  $(this).toggleClass("complited");
+})
