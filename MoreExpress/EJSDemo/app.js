@@ -16,6 +16,15 @@ app.get("/love/:thing", function(req, res) {
   res.render("love.ejs", {thingVar: thing});
 });
 
+app.get("/posts", function(req, res) {
+  var posts = [
+    {title: "Post 1", author: "Susy"},
+    {title: "Post 2", author: "BBB"}
+  ]
+
+  res.render("posts.ejs", {posts: posts});
+});
+
 
 app.listen(3000, function () {
   console.log("Server is listening...");
