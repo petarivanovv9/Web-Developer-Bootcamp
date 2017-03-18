@@ -1,16 +1,35 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
+var express   = require("express"),
+    app       = express(),
+  bodyParser  = require("body-parser"),
+  mongoose    = require("mongoose");
+
+mongoose.connect("mongodb://localhost/yelp_camp");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 
-var campgrounds = [
-  {name: "Salmon Creek", image: "http://www.istockphoto.com/resources/images/PhotoFTLP/img_82250973.jpg"},
-  {name: "Sky", image: "https://www.aviary.com/img/photo-landscape.jpg"},
-  {name: "Mountain", image: "https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-144748015-1-1500x814.jpg"}
-];
+// SCHEMA SETUP
+var campgroundSchema = new mongoose.Schema({
+  name: String,
+  image: String
+});
+
+var Campground = mongoose.model("Campground", campgroundSchema);
+
+// Campground.create(
+//   {
+//     name: "Sky",
+//     image: "https://www.aviary.com/img/photo-landscape.jpg"
+//   }, function(err, campground) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Newly created campground: ");
+//       console.log(campground);
+//     }
+//   }
+// );
 
 
 app.get("/", function(req, res) {
@@ -18,16 +37,26 @@ app.get("/", function(req, res) {
 });
 
 app.get("/campgrounds", function(req, res) {
-  res.render("campgrounds", {campgrounds: campgrounds});
+  Campground.find({}, function(err, allCampgrounds) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("campgrounds", {campgrounds:allCampgrounds});
+    }
+  });
 });
 
 app.post("/campgrounds", function(req, res) {
   var name = req.body.name;
   var image = req.body.image;
   var newCampground = {name: name, image: image};
-  campgrounds.push(newCampground);
-
-  res.redirect("/campgrounds");
+  Campground.create(newCampground, function(err, newlyCreated) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/campgrounds");
+    }
+  });
 });
 
 app.get("/campgrounds/new", function(req, res) {
