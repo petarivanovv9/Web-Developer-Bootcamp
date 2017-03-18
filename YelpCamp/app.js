@@ -12,30 +12,18 @@ app.set("view engine", "ejs");
 // SCHEMA SETUP
 var campgroundSchema = new mongoose.Schema({
   name: String,
-  image: String
+  image: String,
+  description: String
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
-
-// Campground.create(
-//   {
-//     name: "Sky",
-//     image: "https://www.aviary.com/img/photo-landscape.jpg"
-//   }, function(err, campground) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log("Newly created campground: ");
-//       console.log(campground);
-//     }
-//   }
-// );
 
 
 app.get("/", function(req, res) {
   res.render("landing");
 });
 
+// INDEX - show all campgrounds
 app.get("/campgrounds", function(req, res) {
   Campground.find({}, function(err, allCampgrounds) {
     if (err) {
@@ -46,6 +34,7 @@ app.get("/campgrounds", function(req, res) {
   });
 });
 
+// CREATE - add new campground to DB
 app.post("/campgrounds", function(req, res) {
   var name = req.body.name;
   var image = req.body.image;
@@ -59,8 +48,14 @@ app.post("/campgrounds", function(req, res) {
   });
 });
 
+// NEW - show form to create new campgrounds
 app.get("/campgrounds/new", function(req, res) {
   res.render("new.ejs");
+});
+
+// SHOW - show info about one campground
+app.get("/campgrounds/:id", function(req, res) {
+  res.send("/campgrounds/:id");
 });
 
 
