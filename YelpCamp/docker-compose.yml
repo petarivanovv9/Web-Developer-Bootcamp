@@ -5,10 +5,9 @@ services:
     ports:
       - "3000:3000"
     volumes:
+      - .:/YelpCamp
       - /YelpCamp/node_modules
     depends_on:
-      - "mongo"
-    links:
       - "mongo"
   mongo:
     image: mongo:3.4
