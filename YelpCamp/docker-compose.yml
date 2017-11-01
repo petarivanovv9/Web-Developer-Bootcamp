@@ -1,0 +1,18 @@
+version: '2'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - /YelpCamp/node_modules
+    depends_on:
+      - "mongo"
+    links:
+      - "mongo"
+  mongo:
+    image: mongo:3.4
+    volumes:
+      - ~/.docker-volumes/YelpCamp/mongo/:/data/db
+    ports:
+      - "27017:27017"
