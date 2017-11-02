@@ -1,5 +1,7 @@
 version: '2'
+
 services:
+
   app:
     build: .
     ports:
@@ -9,6 +11,7 @@ services:
       - /YelpCamp/node_modules
     depends_on:
       - "mongo"
+      
   mongo:
     image: mongo:3.4
     volumes:
