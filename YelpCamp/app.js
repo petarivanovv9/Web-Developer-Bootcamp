@@ -16,8 +16,10 @@ var commentRoutes     = require("./routes/comments");
     indexRoutes       = require("./routes/index");
 
 
-mongoose.connect("mongodb://mongo:27017");
+// {useMongoClient: true} to fix warning
+mongoose.connect("mongodb://mongo:27017", {useMongoClient: true});
 
+// mongoose warning
 mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({extended: true}));
